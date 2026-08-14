@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Business — Conectando pessoas e propósito em prol da saúde</title>
+<meta name="description" content="A Doctor Business cuida do 360° da relação médico-paciente — gestão, estrutura e acolhimento — para que quem cuida possa se dedicar a quem importa. Fale com a gente.">
+<link rel="canonical" href="https://doctorbusiness.com.br/">
+<meta property="og:title" content="Doctor Business — Facilities de saúde 360°">
+<meta property="og:description" content="Conectando pessoas e propósito em prol da saúde.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Doctor Business","slogan":"Conectando pessoas e propósito em prol da saúde","description":"Facilities de saúde: gestão 360° da relação médico-paciente.","areaServed":"BR"}
+</script>
+<style>
+:root{
+  --paper:#FAF6EF;
+  --paper-2:#F2ECDF;
+  --ink:#17201B;
+  --ink-soft:#4A5650;
+  --green:#0E3B2E;
+  --green-2:#1B5943;
+  --sage:#DDE7DC;
+  --sage-line:#C9D6C8;
+  --terra:#C0663F;
+  --terra-soft:#F0DACC;
+  --gold:#B98A44;
+
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Instrument Sans",-apple-system,sans-serif;
+
+  --text-hero:clamp(2.6rem,1.2rem + 6vw,5.6rem);
+  --text-h2:clamp(1.9rem,1.1rem + 3vw,3.4rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+  --space-section:clamp(4.5rem,3rem + 6vw,9rem);
+
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  font-size:var(--text-base);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--terra);color:var(--paper)}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.08;letter-spacing:-.015em}
+em{font-style:italic}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--paper) 82%,transparent);
+  border-bottom:1px solid color-mix(in srgb,var(--ink) 8%,transparent);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none}
+.logo svg{width:34px;height:34px}
+.logo b{font-family:var(--font-display);font-weight:600;font-size:1.28rem;letter-spacing:-.01em}
+.logo b i{font-style:italic;font-weight:500;color:var(--green-2)}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{
+  text-decoration:none;font-size:.92rem;font-weight:500;color:var(--ink-soft);
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
+  background:var(--terra);transition:width .35s var(--ease);
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--font-body);font-weight:600;font-size:.95rem;
+  padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;
+  border:1.5px solid transparent;cursor:pointer;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .2s,color .2s;
+}
+.btn-solid{background:var(--green);color:var(--paper)}
+.btn-solid:hover{background:var(--green-2);transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(14,59,46,.45)}
+.btn-ghost{border-color:color-mix(in srgb,var(--ink) 22%,transparent);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra);transform:translateY(-2px)}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-terra:hover{background:#A9552F;transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(192,102,63,.5)}
+.nav .btn{padding:.6rem 1.25rem;font-size:.88rem}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:calc(72px + clamp(3.5rem,7vw,7rem)) 0 var(--space-section);overflow:hidden}
+.hero-arcs{position:absolute;top:-12%;right:-16%;width:min(62vw,780px);aspect-ratio:1;pointer-events:none;opacity:.9}
+.hero-arcs circle{fill:none;stroke-linecap:round}
+.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,5vw,5rem);align-items:end;position:relative}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green-2);margin-bottom:1.6rem;
+}
+.eyebrow::before{content:"";width:34px;height:1.5px;background:var(--terra)}
+.hero h1{font-size:var(--text-hero);margin-bottom:1.8rem}
+.hero h1 .accent{
+  font-style:italic;color:var(--terra);position:relative;white-space:nowrap;
+}
+.hero p.lead{max-width:34rem;font-size:clamp(1.05rem,1rem + .4vw,1.3rem);color:var(--ink-soft);margin-bottom:2.4rem}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero-note{font-size:.85rem;color:var(--ink-soft);margin-top:1.1rem}
+.hero-card{
+  position:relative;background:var(--green);color:var(--paper);
+  border-radius:28px;padding:clamp(1.6rem,3vw,2.6rem);
+  box-shadow:0 30px 60px -30px rgba(14,59,46,.5);
+  transform:rotate(1.5deg);
+}
+.hero-card::before{
+  content:"";position:absolute;inset:10px;border:1px solid rgba(250,246,239,.18);
+  border-radius:20px;pointer-events:none;
+}
+.hero-card .sym{width:52px;height:52px;margin-bottom:1.4rem}
+.hero-card blockquote{
+  font-family:var(--font-display);font-size:clamp(1.15rem,1rem + 1vw,1.55rem);
+  font-weight:400;line-height:1.35;font-style:italic;
+}
+.hero-card figcaption{margin-top:1.3rem;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);opacity:.85}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-card{transform:none;max-width:30rem}
+}
+
+/* ---------- marquee ---------- */
+.marquee{
+  background:var(--ink);color:var(--paper);overflow:hidden;padding:1.05rem 0;
+  transform:rotate(-1.2deg) scale(1.02);margin:1rem 0;
+}
+.marquee-track{display:flex;gap:3rem;width:max-content;animation:slide 30s linear infinite}
+.marquee span{
+  font-family:var(--font-display);font-style:italic;font-size:1.05rem;white-space:nowrap;
+  display:flex;align-items:center;gap:3rem;
+}
+.marquee span::after{content:"✦";font-style:normal;color:var(--terra);font-size:.8rem}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- BAB / antes-depois ---------- */
+.section{padding:var(--space-section) 0}
+.section-head{max-width:44rem;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
+.section-head h2{font-size:var(--text-h2);margin:1.2rem 0 1rem}
+.section-head p{color:var(--ink-soft);font-size:1.08rem}
+.bab{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.bab-col{border-radius:24px;padding:clamp(1.6rem,3vw,2.8rem)}
+.bab-before{background:var(--paper-2);border:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
+.bab-after{background:var(--sage);border:1px solid var(--sage-line)}
+.bab-col h3{font-size:1.5rem;margin-bottom:1.4rem;display:flex;align-items:baseline;gap:.7rem}
+.bab-col h3 small{font-family:var(--font-body);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.bab-after h3 small{color:var(--green-2)}
+.bab ul{list-style:none;display:grid;gap:.95rem}
+.bab li{display:flex;gap:.8rem;align-items:flex-start;color:var(--ink-soft);font-size:.99rem}
+.bab-after li{color:var(--green)}
+.bab li::before{content:"—";flex:none;color:var(--terra);font-weight:600}
+.bab-after li::before{content:"✓";color:var(--green-2)}
+@media(max-width:820px){.bab{grid-template-columns:1fr}}
+
+/* ---------- bento 360 ---------- */
+.dark{background:var(--green);color:var(--paper);position:relative;overflow:hidden}
+.dark .section-head p{color:color-mix(in srgb,var(--paper) 72%,transparent)}
+.dark .eyebrow{color:var(--sage)}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem}
+.cell{
+  border-radius:22px;padding:clamp(1.5rem,2.5vw,2.3rem);
+  background:rgba(250,246,239,.05);
+  border:1px solid rgba(250,246,239,.12);
+  transition:transform .4s var(--ease),background .3s,border-color .3s;
+  position:relative;
+}
+.cell:hover{transform:translateY(-6px);background:rgba(250,246,239,.09);border-color:rgba(250,246,239,.25)}
+.cell .num{
+  font-family:var(--font-display);font-style:italic;font-size:.95rem;color:var(--terra);
+  display:block;margin-bottom:1.1rem;
+}
+.cell h3{font-size:1.42rem;margin-bottom:.8rem}
+.cell p{font-size:.97rem;color:color-mix(in srgb,var(--paper) 72%,transparent)}
+.cell-lg{grid-column:span 6}
+.cell-sm{grid-column:span 4}
+.cell-featured{background:var(--terra);border-color:transparent}
+.cell-featured .num{color:var(--paper)}
+.cell-featured p{color:rgba(255,255,255,.85)}
+.cell-featured:hover{background:#A9552F}
+.cell-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.tag{
+  font-size:.76rem;font-weight:500;padding:.32rem .8rem;border-radius:999px;
+  border:1px solid rgba(250,246,239,.25);color:color-mix(in srgb,var(--paper) 85%,transparent);
+}
+.cell-featured .tag{border-color:rgba(255,255,255,.4);color:#fff}
+@media(max-width:900px){.cell-lg,.cell-sm{grid-column:span 12}}
+
+/* ---------- como funciona ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;counter-reset:step}
+.step{
+  counter-increment:step;position:relative;
+  border-top:2px solid var(--sage-line);padding-top:1.8rem;
+}
+.step::before{
+  content:"0" counter(step);
+  font-family:var(--font-display);font-style:italic;font-size:2.6rem;color:var(--terra);
+  display:block;margin-bottom:1rem;line-height:1;
+}
+.step h3{font-size:1.35rem;margin-bottom:.7rem}
+.step p{color:var(--ink-soft);font-size:.98rem}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+
+/* ---------- princípios ---------- */
+.principios{background:var(--paper-2)}
+.prin-list{border-top:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.prin{
+  display:grid;grid-template-columns:auto 1fr 2fr;gap:clamp(1rem,4vw,4rem);
+  align-items:baseline;padding:clamp(1.6rem,3vw,2.4rem) 0;
+  border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);
+  transition:padding-left .35s var(--ease);
+}
+.prin:hover{padding-left:1.2rem}
+.prin .n{font-family:var(--font-display);font-style:italic;color:var(--terra);font-size:1.1rem}
+.prin h3{font-size:clamp(1.3rem,1rem + 1.4vw,2rem)}
+.prin p{color:var(--ink-soft);font-size:.99rem}
+@media(max-width:820px){.prin{grid-template-columns:auto 1fr}.prin p{grid-column:2}}
+
+/* ---------- CTA final ---------- */
+.cta-final{text-align:center;position:relative;overflow:hidden}
+.cta-final .sym-bg{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(90vw,640px);opacity:.06;pointer-events:none;
+}
+.cta-final h2{font-size:clamp(2.2rem,1.4rem + 4vw,4.2rem);max-width:20ch;margin:0 auto 1.4rem}
+.cta-final p{max-width:36rem;margin:0 auto 2.6rem;color:var(--ink-soft);font-size:1.1rem}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--paper);padding:3.5rem 0 2.5rem}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+.foot small{color:color-mix(in srgb,var(--paper) 55%,transparent);font-size:.85rem}
+.foot .logo b{font-size:1.1rem;color:var(--paper)}
+.foot .logo b i{color:var(--sage)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .marquee-track{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="Doctor Business — início">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#0E3B2E" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="43" cy="12.95" r="5" fill="#0E3B2E"/>
+        <circle cx="51.05" cy="43" r="5" fill="#C0663F"/>
+      </svg>
+      <b>doctor<i>business</i></b>
+    </a>
+    <nav aria-label="Navegação principal">
+      <ul class="nav-links">
+        <li><a href="#ecossistema">O 360°</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#principios">Princípios</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-solid" href="#contato">Falar com a gente</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-heading">
+  <svg class="hero-arcs" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="120" stroke="#DDE7DC" stroke-width="1.5" stroke-dasharray="565 190" transform="rotate(-40 300 300)"/>
+    <circle cx="300" cy="300" r="185" stroke="#C9D6C8" stroke-width="1.5" stroke-dasharray="870 292" transform="rotate(30 300 300)"/>
+    <circle cx="300" cy="300" r="250" stroke="#DDE7DC" stroke-width="1.5" stroke-dasharray="1178 393" transform="rotate(110 300 300)"/>
+    <circle cx="300" cy="300" r="250" fill="none" stroke="none"/>
+    <circle cx="470" cy="185" r="7" fill="#C0663F"/>
+    <circle cx="140" cy="430" r="7" fill="#0E3B2E"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Facilities de saúde · 360° médico-paciente</span>
+      <h1 id="hero-heading">A medicina é feita de pessoas. <span class="accent">O resto,</span> a gente cuida.</h1>
+      <p class="lead">A Doctor Business facilita o 360° da relação médico-paciente — gestão, estrutura, jornada e acolhimento — para que quem cuida possa se dedicar por inteiro a quem importa.</p>
+      <div class="hero-cta">
+        <a class="btn btn-terra" href="#contato">Conhecer a Doctor Business →</a>
+        <a class="btn btn-ghost" href="#ecossistema">Ver o ecossistema</a>
+      </div>
+      <p class="hero-note">Conversa inicial sem compromisso · Atendemos médicos, clínicas e pacientes</p>
+    </div>
+    <figure class="hero-card reveal">
+      <svg class="sym" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#FAF6EF" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="43" cy="12.95" r="5" fill="#FAF6EF"/>
+        <circle cx="51.05" cy="43" r="5" fill="#C0663F"/>
+      </svg>
+      <blockquote>“Conectando pessoas e propósito em prol da saúde.”</blockquote>
+      <figcaption>Nosso compromisso — Doctor Business</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Pessoas antes de processos</span><span>Cuidado 360°</span><span>Ética como fundação</span><span>Propósito em prol da saúde</span>
+    <span>Pessoas antes de processos</span><span>Cuidado 360°</span><span>Ética como fundação</span><span>Propósito em prol da saúde</span>
+  </div>
+</div>
+
+<!-- BAB -->
+<section class="section" aria-labelledby="bab-heading">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Antes &amp; depois</span>
+      <h2 id="bab-heading">O cuidado se perde quando a operação pesa.</h2>
+      <p>Médicos sobrecarregados com gestão. Pacientes perdidos entre agendas, guias e retornos. A Doctor Business existe para devolver a cada um o seu papel: um cuida, o outro é cuidado.</p>
+    </div>
+    <div class="bab">
+      <div class="bab-col bab-before reveal">
+        <h3><small>Antes</small> A rotina que desgasta</h3>
+        <ul>
+          <li>Agenda, faturamento e burocracia disputando o tempo da consulta</li>
+          <li>Paciente sem acompanhamento entre uma consulta e outra</li>
+          <li>Estrutura cara, ociosa e difícil de administrar</li>
+          <li>Relação médico-paciente reduzida a encaixes de 15 minutos</li>
+        </ul>
+      </div>
+      <div class="bab-col bab-after reveal">
+        <h3><small>Depois</small> A medicina no centro</h3>
+        <ul>
+          <li>Operação completa facilitada: agenda, estrutura, faturamento e apoio</li>
+          <li>Jornada do paciente acompanhada do primeiro contato ao pós-consulta</li>
+          <li>Estrutura sob medida, sem imobilizar capital</li>
+          <li>Tempo e presença de volta para a relação que importa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSSISTEMA 360 -->
+<section class="section dark" id="ecossistema" aria-labelledby="eco-heading">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O ecossistema</span>
+      <h2 id="eco-heading">Um só parceiro para o 360° do contexto médico-paciente.</h2>
+      <p>Não somos mais um sistema, nem mais um fornecedor. Somos a camada de facilities que sustenta toda a relação de cuidado.</p>
+    </div>
+    <div class="bento">
+      <div class="cell cell-lg cell-featured reveal">
+        <span class="num">para médicos</span>
+        <h3>Exerça a medicina. Só a medicina.</h3>
+        <p>Consultório pronto, agenda gerida, faturamento organizado e apoio operacional completo — você entra com o cuidado, a gente entra com todo o resto.</p>
+        <div class="cell-tags"><span class="tag">Estrutura completa</span><span class="tag">Gestão de agenda</span><span class="tag">Faturamento</span><span class="tag">Apoio operacional</span></div>
+      </div>
+      <div class="cell cell-lg reveal">
+        <span class="num">para pacientes</span>
+        <h3>Uma jornada acompanhada, não episódica.</h3>
+        <p>Do primeiro contato ao acompanhamento contínuo: acolhimento humano, acesso facilitado e alguém que conhece a sua história em cada etapa.</p>
+        <div class="cell-tags"><span class="tag">Acolhimento</span><span class="tag">Navegação de cuidado</span><span class="tag">Acompanhamento contínuo</span></div>
+      </div>
+      <div class="cell cell-sm reveal">
+        <span class="num">para clínicas</span>
+        <h3>Operação sem atrito</h3>
+        <p>Gestão de espaços, processos e compliance para clínicas que querem crescer com saúde.</p>
+      </div>
+      <div class="cell cell-sm reveal">
+        <span class="num">tecnologia</span>
+        <h3>Invisível, como deve ser</h3>
+        <p>Sistemas que trabalham nos bastidores — sem colocar telas entre as pessoas.</p>
+      </div>
+      <div class="cell cell-sm reveal">
+        <span class="num">rede</span>
+        <h3>Conexões com propósito</h3>
+        <p>Médicos, especialidades e serviços conectados em torno de cada paciente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section" id="como-funciona" aria-labelledby="como-heading">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">A ponte</span>
+      <h2 id="como-heading">Como a Doctor Business entra na sua rotina</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Escuta e diagnóstico</h3>
+        <p>Entendemos o seu contexto — especialidade, momento, estrutura atual e o que está tirando seu tempo do cuidado.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Desenho do 360°</h3>
+        <p>Montamos o plano de facilities sob medida: estrutura, gestão, jornada do paciente e apoio operacional.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Operação contínua</h3>
+        <p>Assumimos os bastidores e acompanhamos indicadores de perto — enquanto a relação médico-paciente volta ao centro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCÍPIOS -->
+<section class="section principios" id="principios" aria-labelledby="prin-heading">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Princípios inegociáveis</span>
+      <h2 id="prin-heading">O que nos guia quando ninguém está olhando</h2>
+    </div>
+    <div class="prin-list">
+      <div class="prin reveal">
+        <span class="n">01</span>
+        <h3>Pessoas antes de processos</h3>
+        <p>Todo processo existe para servir uma pessoa — nunca o contrário. Quando um fluxo atrapalha o cuidado, mudamos o fluxo.</p>
+      </div>
+      <div class="prin reveal">
+        <span class="n">02</span>
+        <h3>Ética como fundação</h3>
+        <p>Saúde não admite atalhos. Transparência com médicos, pacientes e parceiros em cada decisão, contrato e conversa.</p>
+      </div>
+      <div class="prin reveal">
+        <span class="n">03</span>
+        <h3>Cuidado contínuo, não pontual</h3>
+        <p>Saúde não acontece só na consulta. Construímos jornadas que acompanham a vida real das pessoas.</p>
+      </div>
+      <div class="prin reveal">
+        <span class="n">04</span>
+        <h3>Propósito compartilhado</h3>
+        <p>Só crescemos quando médico, paciente e comunidade crescem juntos. Esse é o nosso modelo de negócio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section cta-final" id="contato" aria-labelledby="cta-heading">
+  <svg class="sym-bg" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#0E3B2E" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="43" cy="12.95" r="5" fill="#0E3B2E"/>
+    <circle cx="51.05" cy="43" r="5" fill="#C0663F"/>
+  </svg>
+  <div class="wrap reveal">
+    <span class="eyebrow" style="justify-content:center;display:inline-flex">Vamos conversar</span>
+    <h2 id="cta-heading">Volte a cuidar. <em style="color:var(--terra)">A gente conecta o resto.</em></h2>
+    <p>Conte para a gente o seu contexto — médico, clínica ou paciente. Em uma conversa, mostramos como o 360° da Doctor Business funciona para você.</p>
+    <a class="btn btn-terra" href="mailto:contato@doctorbusiness.com.br">Agendar uma conversa →</a>
+    <p class="hero-note">Resposta em até 1 dia útil</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#" aria-label="Doctor Business">
+      <svg viewBox="0 0 64 64" aria-hidden="true" width="28" height="28">
+        <path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#DDE7DC" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="43" cy="12.95" r="5" fill="#DDE7DC"/>
+        <circle cx="51.05" cy="43" r="5" fill="#C0663F"/>
+      </svg>
+      <b>doctor<i>business</i></b>
+    </a>
+    <small>Conectando pessoas e propósito em prol da saúde.</small>
+    <small>© 2026 Doctor Business · Grupo VERBO</small>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

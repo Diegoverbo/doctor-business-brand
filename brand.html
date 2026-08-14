@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Business — Manual de Identidade Visual v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EF;--paper-2:#F2ECDF;--ink:#17201B;--ink-soft:#4A5650;
+  --green:#0E3B2E;--green-2:#1B5943;--sage:#DDE7DC;--sage-line:#C9D6C8;
+  --terra:#C0663F;--terra-soft:#F0DACC;--gold:#B98A44;
+  --font-display:"Fraunces",Georgia,serif;--font-body:"Instrument Sans",sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.1;letter-spacing:-.015em}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+.chapter{padding:clamp(3.5rem,7vw,6.5rem) 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+.kicker{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green-2);margin-bottom:1.2rem}
+.kicker::before{content:"";width:30px;height:1.5px;background:var(--terra)}
+.chapter h2{font-size:clamp(1.8rem,1.2rem + 2.5vw,3rem);margin-bottom:1rem}
+.chapter>.wrap>p.intro{max-width:42rem;color:var(--ink-soft);margin-bottom:2.6rem;font-size:1.05rem}
+
+/* capa */
+.cover{min-height:88vh;display:flex;align-items:center;background:var(--green);color:var(--paper);position:relative;overflow:hidden}
+.cover-arcs{position:absolute;right:-14%;top:-18%;width:min(60vw,700px);opacity:.25}
+.cover .kicker{color:var(--sage)}
+.cover h1{font-size:clamp(2.8rem,1.5rem + 6vw,6rem);max-width:14ch;margin-bottom:1.6rem}
+.cover h1 i{color:var(--terra-soft)}
+.cover p{color:color-mix(in srgb,var(--paper) 75%,transparent);max-width:34rem;font-size:1.1rem}
+.cover .meta{margin-top:3rem;display:flex;gap:2.5rem;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage)}
+
+/* essencia */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.pillar{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-radius:20px;padding:2rem}
+.pillar .n{font-family:var(--font-display);font-style:italic;color:var(--terra);display:block;margin-bottom:.9rem}
+.pillar h3{font-size:1.3rem;margin-bottom:.6rem}
+.pillar p{font-size:.95rem;color:var(--ink-soft)}
+.statement{background:var(--paper-2);border-left:4px solid var(--terra);border-radius:0 18px 18px 0;padding:2rem 2.4rem;margin-top:2.2rem}
+.statement p{font-family:var(--font-display);font-style:italic;font-size:clamp(1.3rem,1rem + 1.5vw,1.9rem);line-height:1.35}
+
+/* logo */
+.logo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.logo-card{border-radius:20px;padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;min-height:230px;border:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}
+.logo-card figcaption{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;opacity:.65}
+.lc-light{background:#fff}
+.lc-dark{background:var(--green);color:var(--paper)}
+.lc-paper{background:var(--paper-2)}
+.lc-terra{background:var(--terra);color:#fff}
+.construct{margin-top:2rem;background:#fff;border:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-radius:20px;padding:2.4rem;display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:center}
+.construct ul{list-style:none;display:grid;gap:.8rem;font-size:.96rem;color:var(--ink-soft)}
+.construct li::before{content:"→ ";color:var(--terra);font-weight:600}
+@media(max-width:820px){.logo-grid,.pillars,.construct{grid-template-columns:1fr}}
+
+/* cores */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem}
+.swatch{border-radius:18px;overflow:hidden;border:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+.swatch .chip{height:130px;position:relative}
+.swatch .chip span{position:absolute;bottom:.8rem;left:1rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.swatch .info{background:#fff;padding:1rem 1.1rem}
+.swatch .info b{display:block;font-size:.98rem}
+.swatch .info code{font-size:.82rem;color:var(--ink-soft)}
+.swatch .info small{display:block;margin-top:.35rem;font-size:.8rem;color:var(--ink-soft)}
+.ratio{margin-top:2rem;display:flex;height:56px;border-radius:14px;overflow:hidden;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.ratio div{display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;letter-spacing:.08em}
+
+/* tipografia */
+.type-card{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-radius:20px;padding:2.4rem;margin-bottom:1.2rem}
+.type-card .label{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--green-2);margin-bottom:1rem;display:block}
+.type-sample-d{font-family:var(--font-display);font-size:clamp(2rem,1.2rem + 3vw,3.4rem);line-height:1.1;letter-spacing:-.015em}
+.type-sample-d i{color:var(--terra)}
+.type-card p.spec{margin-top:1.2rem;font-size:.88rem;color:var(--ink-soft)}
+.type-scale{display:grid;gap:.9rem;margin-top:.6rem}
+.type-scale div{display:flex;align-items:baseline;gap:1.4rem;border-bottom:1px dashed var(--sage-line);padding-bottom:.9rem}
+.type-scale code{font-size:.78rem;color:var(--ink-soft);flex:none;width:9.5rem}
+
+/* voz */
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.voice-col{border-radius:20px;padding:2rem}
+.voice-yes{background:var(--sage);border:1px solid var(--sage-line)}
+.voice-no{background:var(--paper-2);border:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
+.voice-col h3{font-size:1.2rem;margin-bottom:1.1rem}
+.voice-col ul{list-style:none;display:grid;gap:.75rem;font-size:.95rem}
+.voice-yes li::before{content:"✓ ";color:var(--green-2);font-weight:700}
+.voice-no li::before{content:"✕ ";color:var(--terra);font-weight:700}
+.voice-ex{margin-top:1.2rem;background:#fff;border-radius:14px;padding:1.2rem 1.4rem;font-size:.92rem}
+.voice-ex i{font-family:var(--font-display)}
+@media(max-width:820px){.voice{grid-template-columns:1fr}}
+
+/* aplicações */
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.app-card{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-radius:20px;padding:2rem;display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
+.app-card .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.92rem;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font-family:var(--font-body)}
+.btn-solid{background:var(--green);color:var(--paper)}
+.btn-terra{background:var(--terra);color:#fff}
+.btn-ghost{border-color:color-mix(in srgb,var(--ink) 25%,transparent);color:var(--ink)}
+.tagchip{font-size:.78rem;font-weight:500;padding:.35rem .85rem;border-radius:999px;background:var(--sage);color:var(--green)}
+.dont{margin-top:2.4rem}
+.dont ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;font-size:.94rem;color:var(--ink-soft)}
+.dont li::before{content:"✕ ";color:var(--terra);font-weight:700}
+@media(max-width:820px){.apps{grid-template-columns:1fr}.dont ul{grid-template-columns:1fr}}
+
+footer{padding:2.5rem 0;text-align:center;font-size:.85rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<section class="cover">
+  <svg class="cover-arcs" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="140" fill="none" stroke="#DDE7DC" stroke-width="1.5" stroke-dasharray="660 220"/>
+    <circle cx="300" cy="300" r="215" fill="none" stroke="#DDE7DC" stroke-width="1.5" stroke-dasharray="1013 338" transform="rotate(70 300 300)"/>
+    <circle cx="440" cy="185" r="8" fill="#C0663F"/>
+  </svg>
+  <div class="wrap">
+    <span class="kicker">Manual de identidade visual · v1.0 · 2026</span>
+    <h1>doctor<i>business</i></h1>
+    <p>Conectando pessoas e propósito em prol da saúde. Este manual define quem somos visualmente — e por quê. Ele existe para proteger o que a marca tem de mais valioso: coerência entre o que dizemos e o que fazemos.</p>
+    <div class="meta"><span>Grupo VERBO · V3 Saúde</span><span>Facilities 360° médico-paciente</span></div>
+  </div>
+</section>
+
+<!-- 01 ESSÊNCIA -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 01</span>
+    <h2>Essência da marca</h2>
+    <p class="intro">A Doctor Business não é uma empresa de tecnologia, nem uma administradora. É a camada humana e operacional que sustenta a relação médico-paciente por inteiro — o 360° do cuidado.</p>
+    <div class="pillars">
+      <div class="pillar"><span class="n">propósito</span><h3>Por que existimos</h3><p>Devolver ao médico o tempo de cuidar e ao paciente a experiência de ser cuidado — removendo tudo o que atrapalha essa relação.</p></div>
+      <div class="pillar"><span class="n">posicionamento</span><h3>O que somos</h3><p>Facilities de saúde 360°: estrutura, gestão, jornada e acolhimento em um único parceiro, com pessoas e princípios no centro.</p></div>
+      <div class="pillar"><span class="n">personalidade</span><h3>Como nos comportamos</h3><p>Acolhedora sem ser ingênua. Competente sem ser fria. Direta, ética e presente — como um bom médico de família.</p></div>
+    </div>
+    <div class="statement"><p>“A medicina é feita de pessoas. O resto, a gente cuida.”</p></div>
+  </div>
+</section>
+
+<!-- 02 LOGO -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 02</span>
+    <h2>Logotipo — o elo 360°</h2>
+    <p class="intro">O símbolo é um arco de 270° que quase se fecha: o círculo do cuidado completo. Nas duas extremidades, dois pontos — o médico (verde) e o paciente (terracota). A Doctor Business é o arco que os conecta. O que falta para fechar o círculo é intencional: quem completa o 360° são as pessoas.</p>
+    <div class="logo-grid">
+      <figure class="logo-card lc-light">
+        <svg width="240" viewBox="0 0 340 64"><path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#0E3B2E" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="12.95" r="5" fill="#0E3B2E"/><circle cx="51.05" cy="43" r="5" fill="#C0663F"/><text x="76" y="42" font-family="Fraunces,Georgia,serif" font-size="28" font-weight="600" fill="#17201B" letter-spacing="-0.5">doctor<tspan font-style="italic" font-weight="500" fill="#1B5943">business</tspan></text></svg>
+        <figcaption>Assinatura principal</figcaption>
+      </figure>
+      <figure class="logo-card lc-dark">
+        <svg width="240" viewBox="0 0 340 64"><path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#FAF6EF" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="12.95" r="5" fill="#FAF6EF"/><circle cx="51.05" cy="43" r="5" fill="#C0663F"/><text x="76" y="42" font-family="Fraunces,Georgia,serif" font-size="28" font-weight="600" fill="#FAF6EF" letter-spacing="-0.5">doctor<tspan font-style="italic" font-weight="500" fill="#DDE7DC">business</tspan></text></svg>
+        <figcaption>Sobre verde-clínica</figcaption>
+      </figure>
+      <figure class="logo-card lc-paper">
+        <svg width="90" viewBox="0 0 64 64"><path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#0E3B2E" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="12.95" r="5" fill="#0E3B2E"/><circle cx="51.05" cy="43" r="5" fill="#C0663F"/></svg>
+        <figcaption>Símbolo isolado (avatar, favicon)</figcaption>
+      </figure>
+      <figure class="logo-card lc-terra">
+        <svg width="90" viewBox="0 0 64 64"><path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="12.95" r="5" fill="#fff"/><circle cx="51.05" cy="43" r="5" fill="#0E3B2E"/></svg>
+        <figcaption>Sobre terracota</figcaption>
+      </figure>
+    </div>
+    <div class="construct">
+      <svg width="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="none" stroke="#C9D6C8" stroke-width="1" stroke-dasharray="3 3"/><path d="M43 12.95 A22 22 0 1 0 51.05 43" fill="none" stroke="#0E3B2E" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="12.95" r="5" fill="#0E3B2E"/><circle cx="51.05" cy="43" r="5" fill="#C0663F"/></svg>
+      <ul>
+        <li>Wordmark sempre em caixa-baixa: <b>doctor</b> em regular + <b><i>business</i></b> em itálico — técnica e humanidade juntas</li>
+        <li>Área de respiro mínima: a altura do ponto terracota em todos os lados</li>
+        <li>Tamanho mínimo: 24px de altura (digital) · 8mm (impresso)</li>
+        <li>O ponto terracota nunca muda de cor sozinho — os dois pontos são a marca</li>
+        <li>Nunca fechar o arco em círculo completo, rotacionar ou distorcer</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CORES -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 03</span>
+    <h2>Paleta cromática</h2>
+    <p class="intro">Fugimos do azul-hospital genérico. Nossa paleta vem do consultório humano: papel, plantas, madeira e pele. Verde profundo transmite confiança clínica; terracota traz o calor humano que diferencia a marca.</p>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#0E3B2E"><span style="color:#FAF6EF">Primária</span></div><div class="info"><b>Verde-Clínica</b><code>#0E3B2E · RGB 14 59 46</code><small>Confiança, solidez, saúde. Fundos de destaque, logo, títulos sobre claro.</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#C0663F"><span style="color:#fff">Acento</span></div><div class="info"><b>Terracota Humana</b><code>#C0663F · RGB 192 102 63</code><small>O ponto do paciente. CTAs, destaques, itálicos de ênfase. Usar com intenção.</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#FAF6EF;border-bottom:1px solid #eee"><span style="color:#17201B">Base</span></div><div class="info"><b>Papel Quente</b><code>#FAF6EF · RGB 250 246 239</code><small>Fundo padrão. Nunca branco puro — a marca é acolhedora, não estéril.</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#DDE7DC"><span style="color:#0E3B2E">Superfície</span></div><div class="info"><b>Sálvia</b><code>#DDE7DC · RGB 221 231 220</code><small>Cards, seções de apoio, estados positivos.</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#17201B"><span style="color:#FAF6EF">Neutro</span></div><div class="info"><b>Tinta</b><code>#17201B · RGB 23 32 27</code><small>Texto principal e footer. Verde quase-preto, nunca #000.</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#B98A44"><span style="color:#fff">Apoio</span></div><div class="info"><b>Dourado Discreto</b><code>#B98A44 · RGB 185 138 68</code><small>Selos, detalhes premium, dados. Máximo 5% de qualquer peça.</small></div></div>
+    </div>
+    <div class="ratio">
+      <div style="flex:6;background:#FAF6EF;color:#17201B">60% papel</div>
+      <div style="flex:2.5;background:#0E3B2E;color:#FAF6EF">25% verde</div>
+      <div style="flex:1;background:#DDE7DC;color:#0E3B2E">10%</div>
+      <div style="flex:.5;background:#C0663F;color:#fff">5%</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TIPOGRAFIA -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 04</span>
+    <h2>Tipografia</h2>
+    <p class="intro">Um par que traduz a marca: serifa humanista com personalidade para o discurso, sans precisa e neutra para a operação. Exatamente o que somos — calor humano sobre competência técnica.</p>
+    <div class="type-card">
+      <span class="label">Display · Fraunces (Google Fonts)</span>
+      <p class="type-sample-d">Cuidar é um ato de <i>presença</i>.</p>
+      <p class="spec">Títulos, manifestos, citações. Pesos 400–600. Itálico sempre disponível para ênfase emocional. Letter-spacing -1,5%. Nunca em caixa-alta.</p>
+    </div>
+    <div class="type-card">
+      <span class="label">Texto · Instrument Sans (Google Fonts)</span>
+      <div class="type-scale">
+        <div><code>Corpo · 400 · 17-18px</code><span>A Doctor Business facilita o 360° da relação médico-paciente.</span></div>
+        <div><code>Destaque · 500-600</code><span style="font-weight:600">Interface, botões, navegação e rótulos.</span></div>
+        <div><code>Eyebrow · 600 · caps</code><span style="font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green-2)">Facilities de saúde · 360°</span></div>
+      </div>
+      <p class="spec">Corpo de texto, UI e documentos. Fallback institucional (Office/Docs): Georgia + Verdana.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 VOZ -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 05</span>
+    <h2>Tom de voz</h2>
+    <p class="intro">Falamos como um médico de família experiente: com calor, sem infantilizar; com precisão, sem jargão corporativo. Sempre pessoas antes de processos — inclusive na linguagem.</p>
+    <div class="voice">
+      <div class="voice-col voice-yes">
+        <h3>Somos assim</h3>
+        <ul>
+          <li>Direto e caloroso: frases curtas, segunda pessoa, verbos ativos</li>
+          <li>Concreto: falamos de tempo, presença e cuidado — não de "soluções disruptivas"</li>
+          <li>Ético: prometemos apenas o que operamos</li>
+          <li>Humano: "a gente" é bem-vindo; a marca conversa, não palestra</li>
+        </ul>
+        <div class="voice-ex"><i>“Volte a cuidar. A gente conecta o resto.”</i></div>
+      </div>
+      <div class="voice-col voice-no">
+        <h3>Nunca assim</h3>
+        <ul>
+          <li>Tecnochavão: "plataforma disruptiva de healthtech omnichannel"</li>
+          <li>Frieza corporativa: "prezado usuário", "o contratante deverá"</li>
+          <li>Promessa médica: nunca prometemos resultado clínico</li>
+          <li>Urgência artificial: sem "últimas vagas", sem medo como gatilho</li>
+        </ul>
+        <div class="voice-ex" style="text-decoration:line-through;opacity:.6">“Revolucione seu consultório com nossa solução all-in-one!”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 APLICAÇÕES -->
+<section class="chapter">
+  <div class="wrap">
+    <span class="kicker">Capítulo 06</span>
+    <h2>Sistema de aplicação</h2>
+    <p class="intro">Componentes-base do sistema visual. A regra geral: cantos generosos (18–28px), sombras suaves e verdes, movimento sutil, e o terracota sempre reservado para a ação mais importante da página.</p>
+    <div class="apps">
+      <div class="app-card">
+        <span class="label">Botões</span>
+        <a class="btn btn-terra">Ação principal →</a>
+        <a class="btn btn-solid">Ação secundária</a>
+        <a class="btn btn-ghost">Ação terciária</a>
+      </div>
+      <div class="app-card">
+        <span class="label">Chips &amp; selos</span>
+        <span class="tagchip">Cuidado 360°</span>
+        <span class="tagchip" style="background:var(--terra-soft);color:var(--terra)">Para médicos</span>
+        <span class="tagchip" style="background:var(--paper-2);color:var(--ink-soft)">Para pacientes</span>
+      </div>
+      <div class="app-card">
+        <span class="label">Numeração editorial</span>
+        <span style="font-family:var(--font-display);font-style:italic;font-size:2.4rem;color:var(--terra);line-height:1">01</span>
+        <p style="font-size:.9rem;color:var(--ink-soft)">Números sempre em Fraunces itálico terracota — assinatura visual das listas e etapas.</p>
+      </div>
+    </div>
+    <div class="dont">
+      <h3 style="font-size:1.25rem;margin-bottom:1rem">O que a marca nunca faz</h3>
+      <ul>
+        <li>Azul-hospital, branco estéril ou verde-neon de farmácia</li>
+        <li>Fotos de banco genéricas (médico de braços cruzados, jaleco + prancheta)</li>
+        <li>Gradientes roxos, glassmorphism e estética "startup padrão"</li>
+        <li>Caixa-alta em títulos ou tom de urgência artificial</li>
+        <li>Cruz médica, coração de ECG e clichês visuais de saúde</li>
+        <li>Mais de um CTA terracota por dobra</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Doctor Business · Manual de Identidade Visual v1.0 · Grupo VERBO — 2026</div>
+</footer>
+</body>
+</html>
