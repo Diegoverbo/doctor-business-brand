@@ -78,7 +78,10 @@ if [ "$OLD" != "$NEW" ] && grep -q "^$OLD {" "$cand"; then rm -f "$cand"; die "b
 
 if out=$(docker run --rm -v "$cand:/cf/Caddyfile:ro" caddy:2-alpine \
         caddy validate --config /cf/Caddyfile --adapter caddyfile 2>&1); then
-    mv "$cand" "$CADDYFILE"
+    # Reescreve NO MESMO inode: o conteiner do Caddy monta este arquivo sozinho (bind mount de
+    # arquivo unico), e um `mv`/`sed -i` criaria um inode novo que o conteiner nao enxerga.
+    cat "$cand" > "$CADDYFILE"
+    rm -f "$cand"
     docker kill -s USR1 caddy >/dev/null
     sleep 3
     echo "Caddy recarregado por SIGUSR1 (backup: $bak)"
