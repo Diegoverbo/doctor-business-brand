@@ -61,25 +61,30 @@ grep -E '^(SUPABASE_PUBLIC_URL|API_EXTERNAL_URL|SITE_URL|PROXY_DOMAIN|STUDIO_DEF
 log "Caddy: trocando o bloco do Supabase ($OLD -> $NEW)"
 bak="$CADDYFILE.bak-$(date +%Y%m%d-%H%M%S)"
 cp "$CADDYFILE" "$bak"
+# O candidato fica ao lado do Caddyfile (caminho do host): o `docker run` de validacao monta
+# caminhos do HOST, nao deste conteiner — um arquivo em /tmp daqui viraria diretorio vazio la.
+cand="$CADDYFILE.novo"
 # remove o bloco antigo: do comentario "# Supabase (self-hosted)" ate a primeira linha que e so "}"
+# e tira as linhas em branco sobrando no fim
 awk 'BEGIN {skip = 0}
      /^# Supabase \(self-hosted\)/ {skip = 1}
      skip && $0 == "}" {skip = 0; next}
-     !skip {print}' "$bak" > "$tmp/Caddyfile"
-# tira linhas em branco sobrando no fim e acrescenta o bloco novo
-sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$tmp/Caddyfile"
-{ echo; sed "s|__SUPABASE_HOST__|$NEW|g" "$tmp/Caddyfile.supabase"; } >> "$tmp/Caddyfile"
-grep -q "^$NEW {" "$tmp/Caddyfile" || die "bloco novo nao entrou no Caddyfile"
-grep -q "^$OLD {" "$tmp/Caddyfile" && die "bloco antigo ainda presente no Caddyfile; nada aplicado"
+     !skip {lines[++n] = $0}
+     END {while (n > 0 && lines[n] ~ /^[[:space:]]*$/) n--; for (i = 1; i <= n; i++) print lines[i]}' "$bak" > "$cand"
+{ echo; sed "s|__SUPABASE_HOST__|$NEW|g" "$tmp/Caddyfile.supabase"; } >> "$cand"
+grep -q "^$NEW {" "$cand" || { rm -f "$cand"; die "bloco novo nao entrou no Caddyfile"; }
+if grep -q "^$OLD {" "$cand"; then rm -f "$cand"; die "bloco antigo ainda presente no Caddyfile; nada aplicado"; fi
 
-if docker run --rm -v "$tmp/Caddyfile:/cf/Caddyfile:ro" caddy:2-alpine \
-        caddy validate --config /cf/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
-    cp "$tmp/Caddyfile" "$CADDYFILE"
+if out=$(docker run --rm -v "$cand:/cf/Caddyfile:ro" caddy:2-alpine \
+        caddy validate --config /cf/Caddyfile --adapter caddyfile 2>&1); then
+    mv "$cand" "$CADDYFILE"
     docker kill -s USR1 caddy >/dev/null
     sleep 3
     echo "Caddy recarregado por SIGUSR1 (backup: $bak)"
     docker logs --since 20s caddy 2>&1 | grep -i -m3 'reload\|error' || true
 else
+    printf '%s\n' "$out" | tail -5
+    rm -f "$cand"
     die "Caddyfile novo invalido; o atual nao foi alterado (backup em $bak)"
 fi
 
