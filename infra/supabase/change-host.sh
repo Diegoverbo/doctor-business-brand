@@ -73,7 +73,8 @@ awk 'BEGIN {skip = 0}
      END {while (n > 0 && lines[n] ~ /^[[:space:]]*$/) n--; for (i = 1; i <= n; i++) print lines[i]}' "$bak" > "$cand"
 { echo; sed "s|__SUPABASE_HOST__|$NEW|g" "$tmp/Caddyfile.supabase"; } >> "$cand"
 grep -q "^$NEW {" "$cand" || { rm -f "$cand"; die "bloco novo nao entrou no Caddyfile"; }
-if grep -q "^$OLD {" "$cand"; then rm -f "$cand"; die "bloco antigo ainda presente no Caddyfile; nada aplicado"; fi
+# (se o .env ja tinha o host novo, por uma execucao anterior interrompida, OLD == NEW e o teste nao se aplica)
+if [ "$OLD" != "$NEW" ] && grep -q "^$OLD {" "$cand"; then rm -f "$cand"; die "bloco antigo ainda presente no Caddyfile; nada aplicado"; fi
 
 if out=$(docker run --rm -v "$cand:/cf/Caddyfile:ro" caddy:2-alpine \
         caddy validate --config /cf/Caddyfile --adapter caddyfile 2>&1); then
