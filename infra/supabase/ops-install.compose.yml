@@ -1,0 +1,27 @@
+# Instalador temporario do Supabase na VPS, subido pelo Docker Manager da Hostinger
+# (API: vps_docker_create). NAO e a stack do Supabase: e um conteiner descartavel que baixa
+# e roda o install-vps.sh deste repositorio com /srv e o socket do Docker montados.
+# Depois de ler os logs (vps_docker_logs), o projeto e removido (vps_docker_delete).
+#
+# Para reinstalar/instalar em outro host: ajuste `environment` e suba este arquivo como
+# projeto "supabase-install-tmp" no Docker Manager (ou `docker compose -f ... up` na VPS).
+
+services:
+  install:
+    image: docker:27-cli
+    container_name: supabase-install-tmp
+    volumes:
+      - /srv:/srv
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: [web]
+    environment:
+      BASE_URL: https://raw.githubusercontent.com/diegoverbo/doctor-business-brand/claude/compassionate-brahmagupta-pnos8y/infra/supabase
+      SUPABASE_HOST: supabase.doctorbusiness.net.br
+      SITE_URL: https://doctorbusiness.net.br
+      SUPABASE_REF: self-hosted/v0.8.3
+    # o `sleep` mantem o conteiner vivo para os logs serem lidos pela API mesmo se o script falhar
+    command: ["sh", "-c", "wget -q -O /tmp/install-vps.sh \"$$BASE_URL/install-vps.sh\" && sh /tmp/install-vps.sh; sleep 1800"]
+
+networks:
+  web:
+    external: true

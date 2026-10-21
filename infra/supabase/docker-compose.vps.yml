@@ -1,0 +1,34 @@
+# Supabase na VPS (Hostinger, srv1938448) — ajustes locais por cima do compose oficial.
+#
+# Ativado pelo COMPOSE_FILE do .env (gerenciado com `sh run.sh config`):
+#   COMPOSE_FILE=docker-compose.yml:docker-compose.logs.yml:docker-compose.vps.yml
+# O update.sh oficial do Supabase nunca toca neste arquivo nem no .env: as atualizacoes
+# upstream entram por cima sem perder estes ajustes.
+#
+# O QUE ESTE ARQUIVO GARANTE
+#   1. Nada do Supabase publicado na internet pelo Docker. Quem expoe e o Caddy da VPS
+#      (/srv/caddy/Caddyfile), pela rede `web`, so ate o gateway (Envoy, porta 8000), que
+#      serve REST, Auth, Storage, Realtime, Functions e Studio. O Studio pede usuario/senha
+#      (DASHBOARD_* do .env) no proprio gateway; as APIs pedem apikey.
+#   2. Postgres via Supavisor so em 127.0.0.1 — 5432 (modo sessao) e 6543 (modo transacao).
+#      De fora da VPS, tunel SSH: ssh -L 5432:127.0.0.1:5432 root@srv1938448.hstgr.cloud
+#   3. Gateway tambem em 127.0.0.1:8010, so para diagnostico na propria VPS (curl local).
+#   4. O gateway entra na rede `web` com o alias fixo `supabase-api`: o Caddyfile aponta
+#      para ele e continua valido mesmo se o gateway trocar (Envoy -> Kong) no futuro.
+
+services:
+  api-gw:
+    ports: !override
+      - "127.0.0.1:8010:8000/tcp"
+    networks:
+      web:
+        aliases: [supabase-api]
+
+  supavisor:
+    ports: !override
+      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:6543:6543"
+
+networks:
+  web:
+    external: true

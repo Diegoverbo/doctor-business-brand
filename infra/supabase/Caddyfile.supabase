@@ -1,0 +1,14 @@
+# Supabase (self-hosted) — /srv/supabase. Entrada unica pelo gateway Envoy (alias
+# `supabase-api` na rede web): REST, Auth, Storage, Realtime (websocket), Functions e
+# Studio. O Studio pede usuario/senha (DASHBOARD_* do /srv/supabase/.env); as APIs
+# pedem apikey. Instalado por infra/supabase (repositorio doctor-business-brand).
+__SUPABASE_HOST__ {
+	encode zstd gzip
+	reverse_proxy supabase-api:8000
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+		-Server
+	}
+}
