@@ -58,6 +58,11 @@ proxy; o `http-01` passa). Nunca use o modo "Flexible": o Auth gera links com `h
 gateway redireciona em loop. O Caddy emite o certificado Let's Encrypt sozinho assim que o DNS
 resolver; ate la tenta de novo em segundo plano e os outros sites nao sao afetados.
 
+Estado em 2026-10-21: DNS na Cloudflare em modo DNS only, certificado Let's Encrypt emitido
+(valido ate 2027-01-19, renovacao automatica pelo Caddy) e todas as rotas verificadas por
+HTTPS com `check-domain.sh`: Auth, Storage, Functions, Realtime (websocket 101), Studio com
+basic-auth e redirecionamento HTTP para HTTPS.
+
 Historico: instalado em 2026-10-21 como `supabase.doctorbusiness.net.br` e trocado no mesmo
 dia para `supabase.pharmaco.com.br` com `change-host.sh` (o ID do tenant do Supavisor
 continua `doctorbusiness`, por isso o usuario do pooler e `postgres.doctorbusiness`).
@@ -135,7 +140,11 @@ Pelo Docker Manager da Hostinger: ajustar `environment` em `ops-change-host.comp
 o Caddy e recria so os servicos afetados. A mao, na VPS, sao os mesmos tres passos:
 
 1. `.env`: `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, `PROXY_DOMAIN` (e `SITE_URL` se for o caso);
-2. `/srv/caddy/Caddyfile`: o nome do site no bloco do Supabase; depois `docker kill -s USR1 caddy`;
+2. `/srv/caddy/Caddyfile`: o nome do site no bloco do Supabase; depois `docker kill -s USR1 caddy`.
+   **Edite no mesmo arquivo** (editor, `>>`, `cat novo > Caddyfile`): o conteiner monta esse
+   arquivo sozinho e `mv` ou `sed -i` criam um arquivo novo que o Caddy nao enxerga ate ser
+   reiniciado. Se isso acontecer, `caddy-safe-restart.sh` reinicia o Caddy com validacao,
+   medicao dos sites e rollback automatico;
 3. `docker compose up -d --wait`.
 
 ## Seguranca
