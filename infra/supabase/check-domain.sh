@@ -41,9 +41,11 @@ ls /srv/caddy/data/caddy/certificates/*/"$HOST"/ 2>/dev/null | sed 's/^/  arquiv
 # hit <rotulo> <url> [args curl...]: codigo HTTP + trecho
 hit() {
     label=$1; url=$2; shift 2
-    out=$(curl -sS -m 15 -o /tmp/body -w '%{http_code}' "$@" "$url" 2>&1) || true
-    body=$(tr -d '\r\n' < /tmp/body 2>/dev/null | cut -c1-110)
-    printf '  %-34s %s  %s\n' "$label" "$out" "$body"
+    : > /tmp/body
+    code=$(curl -sS -m 15 -o /tmp/body -w '%{http_code}' "$@" "$url" 2>/tmp/err) || true
+    body=$(tr -d '\r\n' < /tmp/body | cut -c1-110)
+    [ -s /tmp/err ] && body="$(tr -d '\r\n' < /tmp/err | cut -c1-110)"
+    printf '  %-34s %s  %s\n' "$label" "$code" "$body"
 }
 
 for mode in dns direto; do
