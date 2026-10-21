@@ -1,0 +1,22 @@
+# Conteiner descartavel para trocar o host publico do Supabase na VPS, subido pelo Docker
+# Manager da Hostinger (vps_docker_create). Roda change-host.sh deste repositorio.
+# Remover depois com vps_docker_delete.
+
+services:
+  change-host:
+    image: docker:27-cli
+    container_name: supabase-change-host-tmp
+    volumes:
+      - /srv:/srv
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: [web]
+    environment:
+      BASE_URL: https://raw.githubusercontent.com/diegoverbo/doctor-business-brand/claude/compassionate-brahmagupta-pnos8y/infra/supabase
+      SUPABASE_HOST: supabase.pharmaco.com.br
+      SITE_URL: https://pharmaco.com.br
+      STUDIO_ORG: Pharmaco
+    command: ["sh", "-c", "wget -q -O /tmp/change-host.sh \"$$BASE_URL/change-host.sh\" && sh /tmp/change-host.sh; sleep 900"]
+
+networks:
+  web:
+    external: true

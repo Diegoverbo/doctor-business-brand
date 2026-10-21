@@ -34,8 +34,8 @@ Arquivos de compose (ativados pelo `COMPOSE_FILE` do `.env`, veja `sh run.sh con
 
 | O que | Onde |
 |---|---|
-| Studio (painel) | `https://supabase.doctorbusiness.net.br/` — usuario e senha `DASHBOARD_*` do `.env` |
-| URL do projeto (SDKs) | `https://supabase.doctorbusiness.net.br` |
+| Studio (painel) | `https://supabase.pharmaco.com.br/` — usuario e senha `DASHBOARD_*` do `.env` |
+| URL do projeto (SDKs) | `https://supabase.pharmaco.com.br` |
 | Chave publica (cliente) | `SUPABASE_PUBLISHABLE_KEY` (`sb_publishable_...`) ou `ANON_KEY` (JWT legado) |
 | Chave de servidor | `SUPABASE_SECRET_KEY` (`sb_secret_...`) ou `SERVICE_ROLE_KEY` — **nunca** no cliente |
 | Postgres direto | so na VPS: `psql -h 127.0.0.1 -p 5432 -U postgres.doctorbusiness` (pooler) ou tunel SSH |
@@ -49,17 +49,24 @@ desenho do upstream (so `service_role`/`sb_secret_` leem a spec); tabelas e RPCs
 `/functions/v1/*` respondem 200 com a chave publica; o Studio em `/` responde 401 sem
 usuario/senha.
 
-**DNS obrigatorio:** o host `supabase.doctorbusiness.net.br` precisa de um registro `A`
-apontando para o IP da VPS (`179.199.136.203`; opcionalmente `AAAA` para
-`2a02:4780:6e:43fe::1`). Na instalacao (2026-10-21) o nome resolvia para `64.29.17.65`
-(wildcard do dominio, fora da Hostinger): ate trocar o registro, o HTTPS publico nao sobe. O Caddy emite o certificado Let's Encrypt sozinho assim que o DNS
-resolver; ate la ele tenta de novo em segundo plano e os outros sites nao sao afetados.
+**DNS obrigatorio (Cloudflare, zona `pharmaco.com.br`):** criar o registro
+`A supabase -> 179.199.136.203` (opcionalmente `AAAA -> 2a02:4780:6e:43fe::1`). Recomendado
+**DNS only** (nuvem cinza): o Caddy da VPS ja faz HTTPS, HSTS e websockets. Se quiser o proxy
+da Cloudflare (nuvem laranja), coloque o SSL/TLS da zona em **Full (strict)** e so ligue o
+proxy depois que o Caddy tiver emitido o certificado (o desafio `tls-alpn-01` nao passa pelo
+proxy; o `http-01` passa). Nunca use o modo "Flexible": o Auth gera links com `https://` e o
+gateway redireciona em loop. O Caddy emite o certificado Let's Encrypt sozinho assim que o DNS
+resolver; ate la tenta de novo em segundo plano e os outros sites nao sao afetados.
+
+Historico: instalado em 2026-10-21 como `supabase.doctorbusiness.net.br` e trocado no mesmo
+dia para `supabase.pharmaco.com.br` com `change-host.sh` (o ID do tenant do Supavisor
+continua `doctorbusiness`, por isso o usuario do pooler e `postgres.doctorbusiness`).
 
 ## Como a VPS expoe o Supabase
 
 ```
 internet ──HTTPS──> caddy (/srv/caddy, portas 80/443)
-                      └─ supabase.doctorbusiness.net.br ──rede web──> supabase-api:8000 (Envoy)
+                      └─ supabase.pharmaco.com.br ──rede web──> supabase-api:8000 (Envoy)
                                                                          ├─ /rest/v1      -> supabase-rest
                                                                          ├─ /auth/v1      -> supabase-auth
                                                                          ├─ /storage/v1   -> supabase-storage
@@ -116,15 +123,20 @@ A versao base fica em `.supabase-version`. Antes de atualizar: **backup do banco
 - **OAuth** (Google, GitHub, Azure...): descomente `GOTRUE_EXTERNAL_*` no `docker-compose.yml`
   e as variaveis no `.env` (docs: self-hosted-oauth).
 - **OpenAI** (`OPENAI_API_KEY`): vazio; habilita o assistente de IA do Studio se preenchido.
-- **Redirects do Auth**: `SITE_URL=https://doctorbusiness.net.br`; outros em
+- **Redirects do Auth**: `SITE_URL=https://pharmaco.com.br`; outros em
   `ADDITIONAL_REDIRECT_URLS`.
 - **Storage em S3** (em vez de disco): override `docker-compose.rustfs.yml` (`sh run.sh config add rustfs`).
 
 ### Trocar o dominio
 
+Pelo Docker Manager da Hostinger: ajustar `environment` em `ops-change-host.compose.yml`
+(`SUPABASE_HOST`, `SITE_URL`, `STUDIO_ORG`) e subir como projeto temporario; o
+`change-host.sh` ajusta o `.env`, troca o bloco do Caddy (com backup e validacao), recarrega
+o Caddy e recria so os servicos afetados. A mao, na VPS, sao os mesmos tres passos:
+
 1. `.env`: `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, `PROXY_DOMAIN` (e `SITE_URL` se for o caso);
 2. `/srv/caddy/Caddyfile`: o nome do site no bloco do Supabase; depois `docker kill -s USR1 caddy`;
-3. `sh run.sh recreate`.
+3. `docker compose up -d --wait`.
 
 ## Seguranca
 
@@ -156,6 +168,6 @@ A versao base fica em `.supabase-version`. Antes de atualizar: **backup do banco
 ```sh
 cd /srv/supabase && docker compose down -v     # para e remove conteineres e volumes nomeados
 rm -rf /srv/supabase                            # dados: volumes/db/data e volumes/storage
-# remover o bloco "supabase.doctorbusiness.net.br { ... }" do /srv/caddy/Caddyfile
+# remover o bloco "supabase.pharmaco.com.br { ... }" do /srv/caddy/Caddyfile
 docker kill -s USR1 caddy
 ```
