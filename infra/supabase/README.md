@@ -42,9 +42,17 @@ Arquivos de compose (ativados pelo `COMPOSE_FILE` do `.env`, veja `sh run.sh con
 
 Ver os segredos na VPS: `cd /srv/supabase && sh run.sh secrets` (ou `cat .env`, chmod 600).
 
+Comportamentos esperados do gateway (verificados na instalacao com `check-vps.sh`):
+`/rest/v1/` (raiz, especificacao OpenAPI) responde **403** para `anon`/`sb_publishable_` por
+desenho do upstream (so `service_role`/`sb_secret_` leem a spec); tabelas e RPCs em
+`/rest/v1/<tabela>` funcionam normalmente. `/auth/v1/*`, `/storage/v1/*` e
+`/functions/v1/*` respondem 200 com a chave publica; o Studio em `/` responde 401 sem
+usuario/senha.
+
 **DNS obrigatorio:** o host `supabase.doctorbusiness.net.br` precisa de um registro `A`
 apontando para o IP da VPS (`179.199.136.203`; opcionalmente `AAAA` para
-`2a02:4780:6e:43fe::1`). O Caddy emite o certificado Let's Encrypt sozinho assim que o DNS
+`2a02:4780:6e:43fe::1`). Na instalacao (2026-10-21) o nome resolvia para `64.29.17.65`
+(wildcard do dominio, fora da Hostinger): ate trocar o registro, o HTTPS publico nao sobe. O Caddy emite o certificado Let's Encrypt sozinho assim que o DNS
 resolver; ate la ele tenta de novo em segundo plano e os outros sites nao sao afetados.
 
 ## Como a VPS expoe o Supabase
