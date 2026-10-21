@@ -1,0 +1,19 @@
+# Verificador descartavel do Supabase na VPS (Docker Manager da Hostinger: vps_docker_create).
+# Roda check-vps.sh deste repositorio pela rede `web`, le o .env somente para montar as
+# requisicoes e nao imprime segredos. Remover depois com vps_docker_delete.
+
+services:
+  check:
+    image: docker:27-cli
+    container_name: supabase-check-tmp
+    volumes:
+      - /srv/supabase/.env:/env:ro
+    networks: [web]
+    environment:
+      BASE_URL: https://raw.githubusercontent.com/diegoverbo/doctor-business-brand/claude/compassionate-brahmagupta-pnos8y/infra/supabase
+      SUPABASE_HOST: supabase.doctorbusiness.net.br
+    command: ["sh", "-c", "wget -q -O /tmp/check-vps.sh \"$$BASE_URL/check-vps.sh\" && sh /tmp/check-vps.sh; sleep 900"]
+
+networks:
+  web:
+    external: true
