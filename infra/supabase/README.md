@@ -96,7 +96,8 @@ A versao base fica em `.supabase-version`. Antes de atualizar: **backup do banco
   (crie `/srv/backups` fora do diretorio do projeto). Restaurar: `psql` no `supabase-db`.
 - Arquivos do Storage: `/srv/supabase/volumes/storage`.
 - Configuracao: `.env`, `docker-compose.vps.yml`, `volumes/functions`.
-- A Hostinger tambem oferece snapshot/backup da VPS inteira (hPanel ou API `vps_snapshots_*`).
+- A Hostinger ja faz backup semanal da VPS inteira (acoes `backup_create` no historico da VM);
+  snapshots manuais pelo hPanel ou API `vps_snapshots_*`.
 
 ## Configuracoes que ficaram para depois (no `.env`)
 
@@ -122,7 +123,11 @@ A versao base fica em `.supabase-version`. Antes de atualizar: **backup do banco
 - Todos os segredos foram gerados na propria VPS pelos utilitarios oficiais
   (`utils/generate-keys.sh`, `utils/add-new-auth-keys.sh`): JWT HS256 + par ES256, chaves
   `sb_publishable_`/`sb_secret_`, senhas de Postgres, Studio, Logflare, Supavisor, S3 e Vault.
-- `.env` com `chmod 600`, fora do git. Nunca commitar.
+- `.env` com `chmod 600`, fora do git. Nunca commitar. O `setup.log` (saida do setup.sh
+  oficial, que imprime os segredos gerados) tambem fica `chmod 600` dentro de `/srv/supabase`.
+- Trocar a senha do Studio: editar `DASHBOARD_PASSWORD` no `.env` e `sh run.sh recreate api-gw`.
+  Rotacionar as chaves de API: `sh utils/generate-keys.sh` e `sh utils/add-new-auth-keys.sh`
+  (docs: self-hosted-auth-keys), depois `sh run.sh recreate`.
 - Studio atras de basic-auth do gateway e de HTTPS (HSTS). APIs exigem `apikey`.
 - Postgres sem porta publica. Para ferramentas externas: tunel SSH.
 - Cabecalhos de seguranca no Caddy (`nosniff`, `Referrer-Policy`, sem `Server`).

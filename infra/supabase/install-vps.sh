@@ -56,9 +56,16 @@ done
 wget -q -O "$tmp/setup.sh" "$UPSTREAM_RAW/setup.sh" || die "falha ao baixar setup.sh ($SUPABASE_REF)"
 
 log "setup.sh oficial do Supabase ($SUPABASE_REF) -> $DIR"
+# O setup.sh imprime TODOS os segredos gerados no stdout (comportamento do upstream). Aqui a
+# saida vai para um log privado dentro do projeto, e nao para os logs do conteiner, que a API
+# da Hostinger expoe. So as linhas de progresso ("===>") passam para o log do conteiner.
+setuplog=/srv/supabase-setup.log
 cd /srv
-sh "$tmp/setup.sh" --skip-deps -y --project-dir supabase --ref "$SUPABASE_REF"
+sh "$tmp/setup.sh" --skip-deps -y --project-dir supabase --ref "$SUPABASE_REF" >"$setuplog" 2>&1 \
+    || { grep -v '=' "$setuplog" | tail -20; die "setup.sh falhou (log completo em $setuplog)"; }
+grep '^===>' "$setuplog" || true
 cd "$DIR"
+mv "$setuplog" ./setup.log && chmod 600 ./setup.log
 [ -f .env ] || die "setup.sh terminou sem gerar o .env"
 chmod 600 .env
 grep -q '^JWT_SECRET=' .env || die "JWT_SECRET nao gerado"

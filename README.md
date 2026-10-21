@@ -13,6 +13,7 @@ Identidade visual e landing page da **Doctor Business** (Grupo VERBO · V3 Saúd
 | [`assets/logo-principal.svg`](assets/logo-principal.svg) | Assinatura principal da marca |
 | [`assets/simbolo.svg`](assets/simbolo.svg) | Símbolo isolado — "o elo 360°" (avatar, favicon) |
 | [`assets/simbolo-negativo.svg`](assets/simbolo-negativo.svg) | Símbolo em versão negativa |
+| [`infra/supabase/`](infra/supabase/README.md) | Supabase self-hosted (stack completa) na VPS da Hostinger — instalação reprodutível e runbook |
 
 ## Fundamentos da marca
 
